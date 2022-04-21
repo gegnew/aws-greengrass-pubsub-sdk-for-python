@@ -36,7 +36,7 @@ To configure the AWS Greengrass PubSub SDK to deploy with an AWS Greengrass Comp
   .....
 ```
 
- A full example of this is given in the [Greengrass component recipe example](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/samples/01-simple-publish-time/src/recipe.json)
+ A full example of this is given in the [Greengrass component recipe example](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/blob/main/samples/gg-pubsub-sdk-component-template/src/recipe.json)
 
 ### Installing Manually
 The AWS Greengrass PubSub SDK provides functionality within an AWS Greengrass component. It only has context within that framework and so for production solutions, its preferred to deploy the SDK with the component as described in the previous example. Manual installation examples given below are intended for development machines. 
