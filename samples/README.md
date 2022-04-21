@@ -24,7 +24,7 @@ git clone https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python.gi
 
 # Take a copy of the selected component template and rename to your desired component name.
 
-cp -Rf aws-greengrass-pubsub-sdk-python/samples/gg-pubsub-sdk-component-template com.example.greengrass-pubsub-component
+cp -Rf aws-greengrass-pubsub-sdk-for-python/samples/gg-pubsub-sdk-component-template com.example.greengrass-pubsub-component
 
 # CD into the template component source directory
 cd com.example.greengrass-pubsub-component/src
