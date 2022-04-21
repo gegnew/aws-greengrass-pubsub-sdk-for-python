@@ -8,16 +8,16 @@ If you have any issues or feature requests, please file an issue or pull request
 
 The AWS Greengrass V2 PubSub Component SDK for Python provides an IoT PubSub application architecture delivered as a Python library to simplify and accelerate development of distributed IoT applications built on AWS Greengrass V2 Components. The SDK abstracts the AWS Greengrass IPC and MQTT PubSub functionality and uses a data driven message format to route PubSub messages to user defined call-backs. This provides a Low/No-Code PubSub messaging service without the common design dependencies of distributed IoT applications. 
 
-![pubsub-sdk-overview](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/images/pubsub-sdk-overview.png)
+![pubsub-sdk-overview](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/blob/main/images/pubsub-sdk-overview.png)
 
 For more details see the AWS Greengrass PubSub Component SDK:
-* [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/developer-guide)
-* [API Docs](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/api-docs)
-* [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/samples)
+* [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/developer-guide)
+* [API Docs](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/api-docs)
+* [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/samples)
 
 ## Getting Started
 
-The easiest way to get started is to build and deploy the AWS Greengrass PubSub SDK component template described in the [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/samples) directory.
+The easiest way to get started is to build and deploy the AWS Greengrass PubSub SDK component template described in the [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/samples) directory.
 
 ## Installation
 
@@ -36,7 +36,7 @@ To configure the AWS Greengrass PubSub SDK to deploy with an AWS Greengrass Comp
   .....
 ```
 
- A full example of this is given in the [Greengrass component recipe example](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/samples/01-simple-publish-time/src/recipe.json)
+ A full example of this is given in the [Greengrass component recipe example](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/samples/01-simple-publish-time/src/recipe.json)
 
 ### Installing Manually
 The AWS Greengrass PubSub SDK provides functionality within an AWS Greengrass component. It only has context within that framework and so for production solutions, its preferred to deploy the SDK with the component as described in the previous example. Manual installation examples given below are intended for development machines. 
@@ -58,9 +58,9 @@ python3 -m pip install ./aws-greengrass-pubsub-sdk-python
 
 Once the AWS Greengrass PubSub SDK is deployed with an AWS Greengrass Component, you can route messages to your application logic via user defined Message Handlers that you register with the SDK 
 
-A production ready AWS Greengrass component template and more detailed examples are provided in the [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/samples) directory.
+A production ready AWS Greengrass component template and more detailed examples are provided in the [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/samples) directory.
 
-The SDK defines the following required message format (with more details provided in the [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/developer-guide))
+The SDK defines the following required message format (with more details provided in the [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/developer-guide)
 ```
 {
   "sdk_version": "0.1.3",
@@ -109,7 +109,7 @@ class MyPubSubMessageHandler():
         log.info('MyPubSubMessageHandler.pubsub_message_route_target received message: {}'.format(message))
 ```
 
-4. Register the message handler class/es with the PubSub SDK Client with the [register_message_handler](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/api-docs/pubsub_client.md#method-register_message_handler) call.
+4. Register the message handler class/es with the PubSub SDK Client with the [register_message_handler](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/api-docs/pubsub_client.md#method-register_message_handler) call.
 ```
 my_pubsub_message_handler = MyPubSubMessageHandler()
 pubsub_client.register_message_handler(my_pubsub_message_handler)
@@ -148,7 +148,7 @@ pubsub_client.subscribe_to_topic('ipc_mqtt', topic)
 If the protocol (IPC or MQTT) is activated, the SDK will subscribe to the topic and begin routig messages immediatly. If not, the subscription request will be stored and actioned when the selected protocol is activated.
 
 ### Publishing Message to PubSub
-The SDK provides a message formatter class to ensure consistent messages. See the [message_formatter](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/api-docs/message_formatter.md) API Docs for more detail.
+The SDK provides a message formatter class to ensure consistent messages. See the [message_formatter](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/api-docs/message_formatter.md) API Docs for more detail.
 
 ```
 # Initialise the PubSubMessageFormatter
@@ -182,15 +182,15 @@ pubsub_client.publish_message('ipc_mqtt', sdk_format_msg)
 
 ## Samples
 
-A complete production ready AWS Greengrass component template is provided in the [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/samples) directory.
+A complete production ready AWS Greengrass component template is provided in the [Samples](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/samples) directory.
 
 ## Getting Help
 
 The best way to interact with our team is through GitHub. You can [open an issue](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/issues) for guidance, bug reports, or feature requests. 
 
 Please make sure to check out our resources before opening an issue:
-* [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/developer-guide)
-* [API Docs](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/docs/api-docs)
+* [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/developer-guide)
+* [API Docs](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/api-docs)
 * [AWS Greengrass V2 Developer Guide](https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html) 
 * [AWS IoT Core Documentation](https://docs.aws.amazon.com/iot/)
 * [AWS Dev Blog](https://aws.amazon.com/blogs/?awsf.blog-master-iot=category-internet-of-things%23amazon-freertos%7Ccategory-internet-of-things%23aws-greengrass%7Ccategory-internet-of-things%23aws-iot-analytics%7Ccategory-internet-of-things%23aws-iot-button%7Ccategory-internet-of-things%23aws-iot-device-defender%7Ccategory-internet-of-things%23aws-iot-device-management%7Ccategory-internet-of-things%23aws-iot-platform)
@@ -199,7 +199,7 @@ Please make sure to check out our resources before opening an issue:
 
 We need your help in making this SDK great. Please participate in the community and contribute to this effort by submitting issues, participating in discussion forums and submitting pull requests through the following channels.
 
-*   [Contributions Guidelines](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/CONTRIBUTING.md)
+*   [Contributions Guidelines](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/blob/main/CONTRIBUTING.md)
 *   Submit [Issues, Feature Requests or Bugs](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/issues)
 
 ## AWS IoT Core Resources
@@ -211,7 +211,7 @@ We need your help in making this SDK great. Please participate in the community 
 
 ## Security
 
-See [CONTRIBUTING](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/CONTRIBUTING.md#security-issue-notifications) for more information.
+See [CONTRIBUTING](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/blob/main/CONTRIBUTING.md#security-issue-notifications) for more information.
 
 ## License
 
