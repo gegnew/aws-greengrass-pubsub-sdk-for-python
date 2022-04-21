@@ -87,7 +87,7 @@ Once the message handler is created, it becomes simple to add additional calls t
 1. We assume the **health_check** method logic publishes a response message to the SDK programmatically,
 1. SDK publishes the message to the selected protocols (IPC and / or MQTT) and topic (Egress topic by default). 
 
-This health_check example is shown in the SDK component template module [my_system_message_handler.py](/samples/gg-pubsub-sdk-component-template/src/my_system_message_handler.py)
+This health_check example is shown in the SDK component template module [my_system_message_handler.py](/samples/gg-pubsub-sdk-component-template/src/pubsub_message_handlers/my_system_message_handler.py)
 
 ## PubSub Topic Schema
 
@@ -199,7 +199,7 @@ pubsub_client.activate_mqtt_pubsub()
 ## Creating Well Formatted Messages
 The SDK provides a message_formatter that returns well-formatted messages from a list of parameterised values. These are described in the API Docs [message_formatter](/docs/api-docs/message_formatter.md).
 
-In particular the [get_message](/docs/api-docs/message_formatter.md#method-get_message) and [get_error_message](docs/api-docs/message_formatter.md#method-get_error_message) calls as shown below:
+In particular the [get_message](/docs/api-docs/message_formatter.md#method-get_message) and [get_error_message](/docs/api-docs/message_formatter.md#method-get_error_message) calls as shown below:
 ```
 from awsgreengrasspubsubsdk.message_formatter import PubSubMessageFormatter
 formatter = PubSubMessageFormatter()
