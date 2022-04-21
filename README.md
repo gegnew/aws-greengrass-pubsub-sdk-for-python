@@ -51,7 +51,7 @@ python3 -m pip install awsgreengrasspubsubsdk
 #### Install from source
 ```
 git clone https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python.git
-python3 -m pip install ./aws-greengrass-pubsub-sdk-python
+python3 -m pip install ./aws-greengrass-pubsub-sdk-for-python
 ```
 
 ## Usage and Code Examples
