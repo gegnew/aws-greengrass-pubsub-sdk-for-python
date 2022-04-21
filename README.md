@@ -63,7 +63,7 @@ A production ready AWS Greengrass component template and more detailed examples 
 The SDK defines the following required message format (with more details provided in the [Developer Guide](https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python/tree/main/docs/developer-guide)
 ```
 {
-  "sdk_version": "0.1.3",
+  "sdk_version": "0.1.4",
   "message_id": "20220403170948930231",
   "status": 200,
   "route": "MyPubSubMessageHandler.pubsub_message_route_target",

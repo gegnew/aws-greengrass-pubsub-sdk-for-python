@@ -121,7 +121,7 @@ Where:
 You should see a periodic message being received from the device as below:
 ```
 {
-  "sdk_version": "0.1.3",
+  "sdk_version": "0.1.4",
   "message_id": "20220329121327002764",
   "status": 200,
   "route": "default_message_handler",
@@ -192,7 +192,7 @@ Where:
 
 ```
 {
-  "sdk_version": "0.1.3",
+  "sdk_version": "0.1.4",
   "message_id": "20220329121327002764",
   "status": 200,
   "route": "MySystemMessageHandler.get_health_check_request",
@@ -203,7 +203,7 @@ Where:
 You should receive the below response on the components egress topic. 
 ```
 {
-  "sdk_version": "0.1.3",
+  "sdk_version": "0.1.4",
   "message_id": "20220329121327002764",
   "status": 200,
   "route": "MySystemMessageHandler.get_health_check_response",
@@ -269,7 +269,7 @@ Using the same **Test** page as above, send the message with the **route** field
 i.e:
 ```
 {
-  "sdk_version": "0.1.3",
+  "sdk_version": "0.1.4",
   "message_id": "20220329121327002764",
   "status": 200,
   "route": "MySensorMessageHandler.get_vibration_sensor_request",

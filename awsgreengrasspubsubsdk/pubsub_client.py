@@ -5,7 +5,7 @@
 Provided as the entry point for the AWS Greengrass V2 PubSub Component SDK. 
 '''
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __status__ = "Development"
 __copyright__ = "Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved."
 __author__ = "Dean Colcott <https://www.linkedin.com/in/deancolcott/>"

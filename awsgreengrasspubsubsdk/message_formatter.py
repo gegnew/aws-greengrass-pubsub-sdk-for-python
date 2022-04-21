@@ -5,7 +5,7 @@
  Defines standard message format for PubSub communications. 
  '''
  
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __status__ = "Development"
 __copyright__ = "Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved."
 __author__ = "Dean Colcott <https://www.linkedin.com/in/deancolcott/>"
@@ -68,7 +68,7 @@ class PubSubMessageFormatter():
        
         ```
        {
-            "sdk_version" : "0.1.3",
+            "sdk_version" : "0.1.4",
             "message_id" : 123456,
             "status" : 200,
             "route" : "health_check_response",
@@ -150,7 +150,7 @@ class PubSubMessageFormatter():
        
         ```
        {
-            "sdk_version" : "0.1.3",
+            "sdk_version" : "0.1.4",
             "message_id" : 123456,
             "status" : 500,
             "route" : "default_error_handler",

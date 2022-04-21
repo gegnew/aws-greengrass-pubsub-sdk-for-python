@@ -22,7 +22,7 @@ The SDK defines a prescribed message format that includes a **route** field to e
  Message routing is based on the **route** field in the SDKs prescribed message format as shown below:
  ```
 {
-  "sdk_version": "0.1.3",
+  "sdk_version": "0.1.4",
   "message_id": "20220403170948930231",
   "status": 200,
   "route": "MyPubSubMessageHandler.pubsub_message_route_target",

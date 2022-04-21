@@ -60,7 +60,7 @@ Example (Dict) returned message object:
 
 ```
 {
-      "sdk_version" : "0.1.3",
+      "sdk_version" : "0.1.4",
       "message_id" : 123456,
       "status" : 500,
       "route" : "default_error_handler",
@@ -123,7 +123,7 @@ Example (Dict) returned message object:
 
 ```
 {
-      "sdk_version" : "0.1.3",
+      "sdk_version" : "0.1.4",
       "message_id" : 123456,
       "status" : 200,
       "route" : "health_check_response",
