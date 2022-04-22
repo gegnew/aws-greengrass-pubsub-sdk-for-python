@@ -3,7 +3,7 @@
 This directory contains a sample AWS Greengrass PubSub SDK component template that you can use as a skeleton framework to start developing your own AWS Greengrass custom components.
 
 ## AWS Greengrass Development Kit
-The sample component is built and deployed using the [AWS Greengrass Development Kit](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-development-kit-cli.html), a development tool to create, test, build, publish, and deploy custom Greengrass components.
+The sample component is built and deployed using the [AWS Greengrass Development Kit](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-development-kit-cli.html). A development tool to create, test, build, publish, and deploy custom Greengrass components.
 
 ## Deploying the AWS Greengrass PubSub SDK Component Template 
 
@@ -30,28 +30,41 @@ cp -Rf aws-greengrass-pubsub-sdk-for-python/samples/gg-pubsub-sdk-component-temp
 cd com.example.greengrass-pubsub-component/src
 ```
 
-### Update the GDK Configuration
+Its recommended to open the component working directory in your preferred IDE now to help with making the proceeding changes and updates.
 
-Open the src/gdk-config.json config file of the sample component and update the fields in square brackets accordingly.  
-**Note:** Remove the brackets / keep the quotes. i.e "[ENTER COMPONENTS NAME]" => "com.example.greengrass-pubsub-sdk"
+
+### Update the GDK Configuration
+The SDK component template is built and published using the AWS Greengrass Development Kit, with behaviors set by the **src/gdk-config.json** config file.
+
+In the AWS Greengrass component directory:
+* Replace the contents of **src/gdk-config.json** with that given below. 
+* Update the **author** and **region** fields accordingly. 
+* If you changed the component name from **com.example.greengrass-pubsub-component** as given above, then update here as well. 
+* Save and close the file.
 ```
 {
   "component" :{
-    "[ENTER COMPONENTS NAME]": {
-      "author": "[ENTER AUTHORS NAME]",
+    "com.example.greengrass-pubsub-component": {
+      "author": "YOUR NAME",
       "version": "NEXT_PATCH",
       "build": {
         "build_system" :"zip"
       },
       "publish": {
-        "bucket": "[ENTER S3 BUCKET FOR DEPLOYMEMT ARTIFACTS]",
-        "region": "[ENTER AWS REGON TO PUBLISH COMPONENT]"
+        "bucket": "aws-greengrass-component-artefacts",
+        "region": "YOUR AWS REGION"
       }
     }
   },
   "gdk_version": "1.0.0"
 }
 ```
+**Notes:**
+* The GDK will create a unique Amazon S3 bucket name to host the component artifacts based on the bucket value, your account ID and the selected region. 
+* Using the given settings, the GDK will create a bucket named: **aws-greengrass-component-artefacts-[region]-[account-id]**.
+* Each component will be given a unique folder and so cyou an use this S3 bucket setting globally for all AWS Greengrass components.
+* Your AWS Identity and Access Management (IAM) permissions must allow Amazon S3 bucket creation and publishing AWS IoT Greengrass components.
+
 
 ### Update the Component Recipe
 The AWS Greengrass component recipe provides metadata, configuration parameters and PubSub access policies for an AWS Greengrass V2 Component. In the src/recipe.json config file, the **ComponentName** field and the PubSub access policy names must be globally unique on a individual Greengrass Core devices. In the template recipe file, these and the **base-pubsub-topic** fields are set to **COMPONENT_NAME**. 
