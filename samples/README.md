@@ -14,7 +14,7 @@ In the following steps we will copy the AWS Greengrass PubSub SDK component temp
 * A registered [AWS Greengrass V2 core device](https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html)
 * Knowledge of [AWS Greengrass Components](https://docs.aws.amazon.com/greengrass/v2/developerguide/create-components.html) and the [AWS Greengrass Developer Guide](https://docs.aws.amazon.com/greengrass/v2/developerguide).
 * The [AWS Greengrass Development Kit](https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-development-kit-cli.html) installed on the development machine. 
-    *  The GDK can be downloaded from the [GDK Repo](https://github.com/aws-greengrass/aws-greengrass-gdk-cli)
+    *  Ensure your development machine has the AWS GDK installed by following this guide to [Install or Update the AWS IoT Greengrass Development Kit Command-Line Interface](https://docs.aws.amazon.com/greengrass/v2/developerguide/install-greengrass-development-kit-cli.html).
 
 ### Clone and Copy the Component Template
 
@@ -70,7 +70,7 @@ The AWS Greengrass component recipe is a config file that provides metadata, con
 
 * Using your preferred IDE or text editor, open the components **src/recipe.json** file then Find and Replace **COMPONENT_NAME** with the component name given above (i.e: MY_COMPONENT_NAME) when you copied the template (default: **com.example.greengrass-pubsub-component**)
 
-This will set the component title, PubSub access policy names and the pubsub-base-topic to your selected component name. The SDK will apply the base-pubsub-topic value to set this components Ingress and Egress topics as follows:
+This will set the component title, PubSub access policy names and the **pubsub-base-topic** to your selected component name. The SDK will apply the **base-pubsub-topic** value to set this components **Ingress** and **Egress** topics as follows:
 
     Ingress Topic: MY_COMPONENT_NAME/GREENGRASS CORE THING NAME/ingress
     Egress Topic: MY_COMPONENT_NAME/GREENGRASS_CORE_THING_NAME/egress
@@ -99,7 +99,12 @@ You can also add you own parameters in the **GGV2PubSubSdkConfig** field and hav
 
 ### Build and Publish the Component to AWS IoT Core
 
+If not already completed, ensure your development machine has the AWS GDK installed by following this guide to [Install or Update the AWS IoT Greengrass Development Kit Command-Line Interface](https://docs.aws.amazon.com/greengrass/v2/developerguide/install-greengrass-development-kit-cli.html).
+
 ```
+# (If not already done, CD into the component src directory
+cd $MY_COMPONENT_NAME/src
+
 # Build the component:
 gdk component build
 
@@ -119,13 +124,28 @@ The AWS Greengrass component will now be published to the AWS IoT Core. You can 
 The final step is to deploy the component to a registered AWS Greengrass Core device:
 * In the [AWS IoT Console](https://console.aws.amazon.com/iot/), select **Greengrass** and then the **Core devices** menu item and click on the Greengrass core you will deploy the component on.
 
-* Select the **Deployments** tab and click on the managed deployment to add this component too (You may have to create one if it doesn't exist).
-* Click **Revise**, **Revise Deployment** then **Next** and select the name of the component you published.
+* Select the **Deployments** tab and click on the managed deployment to add this component too
+  * If your Greengrass Core device doesn’t have an existing deployment, you will need to create one by going to the **Deployments** menu item, clicking **Create**, select the Core device and then following the below instructions from there.
+* Click **Revise**, **Revise Deployment** then **Next** and select the name of the component you published in the **My components** section.
 * Click **Next** leaving all fields default until the final page then click **Deploy**
 
 ## Validate the Component
 
 Once the template component and SDK are installed and operational on an AWS Greengrass core device, it will periodically publish a local time message on the devices egress topic. It will also process and respond to well-formatted request messages as described below.
+
+### Monitoring Greengrass and Component Logs:
+
+Greengrass logs (on the Greengrass Core device) are located in the /greengrass/v2/logs directory.
+
+To fault find or just to view component application logs, on the Greengrass Core device:
+
+```
+# To display the status of the deployment and any recent errors on the Greengrass core
+tail -f /greengrass/v2/logs/greengrass.log
+
+# The application log for the Greengrass component and will show errors and messages being published and received.
+tail -f /greengrass/v2/logs/MY_COMPONENT_NAME.log
+```
 
 ### Verify the Published Time Message
 
