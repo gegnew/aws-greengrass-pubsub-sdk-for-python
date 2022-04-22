@@ -23,14 +23,14 @@ In the following steps we will copy the AWS Greengrass PubSub SDK component temp
 git clone https://github.com/aws-samples/aws-greengrass-pubsub-sdk-for-python.git
 
 # Take a copy of the selected component template and rename to your desired component name.
-
-cp -Rf aws-greengrass-pubsub-sdk-for-python/samples/gg-pubsub-sdk-component-template com.example.greengrass-pubsub-component
+MY_COMPONENT_NAME=com.example.greengrass-pubsub-component
+cp -Rf aws-greengrass-pubsub-sdk-for-python/samples/gg-pubsub-sdk-component-template $MY_COMPONENT_NAME
 
 # CD into the template component source directory
-cd com.example.greengrass-pubsub-component/src
+cd $MY_COMPONENT_NAME/src
 ```
 
-Its recommended to open the component working directory in your preferred IDE now to help with making the proceeding changes and updates.
+**Note:** Its recommended to open the new component directory in your preferred IDE or text editor now to help with making the proceeding changes and updates.
 
 
 ### Update the GDK Configuration
@@ -38,8 +38,8 @@ The SDK component template is built and published using the AWS Greengrass Devel
 
 In the AWS Greengrass component directory:
 * Replace the contents of **src/gdk-config.json** with that given below. 
-* Update the **author** and **region** fields accordingly. 
-* If you changed the component name from **com.example.greengrass-pubsub-component** as given above, then update here as well. 
+* Update the **author** and **region** fields accordingly. (Ensure region supports by AWS Greengrass)
+* If you changed the component name (i.e: MY_COMPONENT_NAME) above, then update **com.example.greengrass-pubsub-component** here as well. 
 * Save and close the file.
 ```
 {
@@ -62,19 +62,25 @@ In the AWS Greengrass component directory:
 **Notes:**
 * The GDK will create a unique Amazon S3 bucket name to host the component artifacts based on the bucket value, your account ID and the selected region. 
 * Using the given settings, the GDK will create a bucket named: **aws-greengrass-component-artefacts-[region]-[account-id]**.
-* Each component will be given a unique folder and so cyou an use this S3 bucket setting globally for all AWS Greengrass components.
+* Each component will be given a unique folder and so you can use this S3 bucket setting globally for all AWS Greengrass components.
 * Your AWS Identity and Access Management (IAM) permissions must allow Amazon S3 bucket creation and publishing AWS IoT Greengrass components.
 
-
 ### Update the Component Recipe
-The AWS Greengrass component recipe provides metadata, configuration parameters and PubSub access policies for an AWS Greengrass V2 Component. In the src/recipe.json config file, the **ComponentName** field and the PubSub access policy names must be globally unique on a individual Greengrass Core devices. In the template recipe file, these and the **base-pubsub-topic** fields are set to **COMPONENT_NAME**. 
+The AWS Greengrass component recipe is a config file that provides metadata, configuration parameters and PubSub access policies for an AWS Greengrass V2 Component. In the component recipe file, the **ComponentName** field and the PubSub access policy names must be globally unique across all components deployed on any individual Greengrass Core device. In the template recipe file, the **ComponentName**, PubSub access policy names and the **base-pubsub-topic** fields are set to **COMPONENT_NAME** and must be updated on new components being deployed.
 
-* Using your preferred IDE or text editor, open the components src/recipe.json file then Find and Replace **COMPONENT_NAME** with the component name used when you copied the template (i.e: **com.example.greengrass-pubsub-component**)
+* Using your preferred IDE or text editor, open the components **src/recipe.json** file then Find and Replace **COMPONENT_NAME** with the component name given above (i.e: MY_COMPONENT_NAME) when you copied the template (default: **com.example.greengrass-pubsub-component**)
+
+This will set the component title, PubSub access policy names and the pubsub-base-topic to your selected component name. The SDK will apply the base-pubsub-topic value to set this components Ingress and Egress topics as follows:
+
+    Ingress Topic: MY_COMPONENT_NAME/GREENGRASS CORE THING NAME/ingress
+    Egress Topic: MY_COMPONENT_NAME/GREENGRASS_CORE_THING_NAME/egress
+
+**Note:** You can manually set the base-pubsub-topic to something other than the component name to adjust the given topic structure. 
 
 * Update the **ComponentDescription** and **ComponentPublisher** as desired.
 
-Update the **GGV2PubSubSdkConfig** field that enables data injection of application parameters, in particular:
-* **base-pubsub-topic**: The base of the PubSub topic schema to be used by the application. This is typically set to the component name and will have been updated if you completed the text Fine and Replace as described above.
+* (optional) Update the remaining **GGV2PubSubSdkConfig** fields that enables data injection of application parameters, in particular:
+
 * **ipc-subscribe-topics**: An array of user defined PubSub topics the component should subscribe to on the IPC bus.
 * **mqtt-subscribe-topics**: An array of user defined PubSub topics the component should subscribe to on the MQTT bus.  
 
@@ -87,7 +93,7 @@ i.e:
         "mqtt-subscribe-topics" : ["mqtt/my-app/broadcast", "mqtt/my-app/error"]
     }
 ```
-In this example, we have defined application broadcast and error PubSub topics that may be used to provide differentiated processing based on priority.
+In this example, we have defined application level broadcast and error PubSub topics that may be used to provide differentiated processing based on priority. Another common usage example is to add the egress topic of other components you want to receive messages from in your application. 
 
 You can also add you own parameters in the **GGV2PubSubSdkConfig** field and have them passed into your application logic using the patterns shown in the component template.
 
