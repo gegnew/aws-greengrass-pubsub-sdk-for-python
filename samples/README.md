@@ -38,7 +38,7 @@ The SDK component template is built and published using the AWS Greengrass Devel
 
 In the AWS Greengrass component directory:
 * Replace the contents of **src/gdk-config.json** with that given below. 
-* Update the **author** and **region** fields accordingly. (Ensure region supports by AWS Greengrass)
+* Update the **author** and **region** fields accordingly. (Ensure region supports AWS Greengrass)
 * If you changed the component name (i.e: MY_COMPONENT_NAME) above, then update **com.example.greengrass-pubsub-component** here as well. 
 * Save and close the file.
 ```
@@ -60,9 +60,9 @@ In the AWS Greengrass component directory:
 }
 ```
 **Notes:**
-* The GDK will create a unique Amazon S3 bucket name to host the component artifacts based on the bucket value, your account ID and the selected region. 
-* Using the given settings, the GDK will create a bucket named: **aws-greengrass-component-artefacts-[region]-[account-id]**.
-* Each component will be given a unique folder and so you can use this S3 bucket setting globally for all AWS Greengrass components.
+* The GDK will create a unique Amazon S3 bucket to host the component artifacts with the name based on the bucket value, your account ID and the selected region. 
+* Using the settings above, the GDK will create a bucket named: **aws-greengrass-component-artefacts-[region]-[account-id]**.
+* Each component will be given a unique folder and so you can use this S3 bucket globally for all AWS Greengrass components.
 * Your AWS Identity and Access Management (IAM) permissions must allow Amazon S3 bucket creation and publishing AWS IoT Greengrass components.
 
 ### Update the Component Recipe
@@ -77,14 +77,14 @@ This will set the component title, PubSub access policy names and the pubsub-bas
 
 **Note:** You can manually set the base-pubsub-topic to something other than the component name to adjust the given topic structure. 
 
+Then, staying in the **src/recipe.json** file:
+
 * Update the **ComponentDescription** and **ComponentPublisher** as desired.
+* (Optional) Update the remaining **GGV2PubSubSdkConfig** fields that enables data injection of application parameters, in particular:
+  * **ipc-subscribe-topics**: An array of user defined PubSub topics the component should subscribe to on the IPC bus.
+  * **mqtt-subscribe-topics**: An array of user defined PubSub topics the component should subscribe to on the MQTT bus.  
 
-* (optional) Update the remaining **GGV2PubSubSdkConfig** fields that enables data injection of application parameters, in particular:
-
-* **ipc-subscribe-topics**: An array of user defined PubSub topics the component should subscribe to on the IPC bus.
-* **mqtt-subscribe-topics**: An array of user defined PubSub topics the component should subscribe to on the MQTT bus.  
-
-These are passed to the AWS Greengrass component on start-up and can be access programmatically. 
+These are passed to the AWS Greengrass component on start-up and will be access programmatically.
 i.e:
 ```
     "GGV2PubSubSdkConfig": {
