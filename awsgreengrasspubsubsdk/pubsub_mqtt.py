@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
 
 class MqttPubSub():
 
-    def __init__(self, message_callback, mqtt_subscribe_topics):
+    def __init__(self, message_callback, mqtt_subscribe_topics, qos=QOS.AT_LEAST_ONCE):
         
             
         super().__init__()
@@ -48,7 +48,7 @@ class MqttPubSub():
         
         # PubSub default MQTT Timeout and QoS
         self.mqtt_default_timeout = 10
-        self.mqtt_default_qos = QOS.AT_LEAST_ONCE 
+        self.mqtt_default_qos = qos
         
         # PubSub message callback.
         self.message_callback = message_callback
