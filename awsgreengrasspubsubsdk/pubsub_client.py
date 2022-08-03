@@ -62,7 +62,7 @@ class AwsGreengrassPubSubSdkClient():
         
     '''
 
-    def __init__(self, base_topic, default_message_handler):
+    def __init__(self, base_topic, default_message_handler, qos=1):
         '''
         Initialises the AWS Greengrass V2 PubSub SDK. 
     
@@ -79,6 +79,7 @@ class AwsGreengrassPubSubSdkClient():
         self.base_topic = base_topic
         self.formatter = PubSubMessageFormatter()
         self.thing_name = os.getenv('AWS_IOT_THING_NAME')
+        self.qos = qos
         log.info('Initialising AWS Greengrass PubSub SDK on Thing: {} with Base Topic: {}.....'.format(self.thing_name, self.base_topic))
         
          # Set the default message handler to catch messages with no matching route.
@@ -196,7 +197,7 @@ class AwsGreengrassPubSubSdkClient():
         '''
         
         log.info('Initialising IPC MQTT IoT Core PubSub messaging.')
-        self.mqtt_pubsub = MqttPubSub(self._received_message_callback, self.mqtt_subscribe_topics)
+        self.mqtt_pubsub = MqttPubSub(self._received_message_callback, self.mqtt_subscribe_topics, self.qos)
         
         # Publish a 200 OK message to indicate IPC is activated
         succ_msg = self.formatter.get_message(message={"event" : "MQTT Client Activated"})
